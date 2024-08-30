@@ -31,10 +31,11 @@
 		where member_no = #{memberNo}
 	</update>
 	
-	<select id="getItempayList" resultType="com.six.dto.ItempayMypage">
-		select ip.itempay_no, i.item_image, i.item_name, ip.itempay_date, ip.itempay_price, ip.itempay_count, ip.itempay_buyer, ip.itempay_email, ip.itempay_receipt
+	<select id="getItempayList" parameterType="int" resultType="com.six.dto.ItempayMypage">
+		select ip.itempay_no, i.item_image, i.item_name, ip.itempay_date, ip.itempay_price, ip.itempay_count, ip.itempay_buyer, ip.itempay_email, ip.itempay_receipt, ip.itempay_point_use, ip.itempay_point, ip.member_no, m.member_grade
 		from itempay ip 
 		left join item i on ip.item_no = i.item_no
+		left join member m on ip.member_no = m.member_no
 		where ip.member_no = #{memberNo}
 		and ip.itempay_refund = 'N'
 	</select>
@@ -45,8 +46,26 @@
 		where itempay_no = #{itempayNo}
 	</update>
 	
+	<update id="returnPointYItem" parameterType="com.six.dto.ItempayMypage">
+		update member
+		set member_point = member_point + #{itempayPoint}
+		where member_no = #{memberNo}
+	</update>
+	
+	<update id="returnPointNItemNew" parameterType="com.six.dto.ItempayMypage">
+		update member
+		set member_point = member_point - (#{itempayPrice} / 20)
+		where member_no = #{memberNo}
+	</update>
+	
+	<update id="returnPointNItemVip" parameterType="com.six.dto.ItempayMypage">
+		update member
+		set member_point = member_point - (#{itempayPrice} / 10)
+		where member_no = #{memberNo}
+	</update>
+	
 	<select id="getRefundItempayList" parameterType="int" resultType="com.six.dto.ItempayMypage">
-		select ip.itempay_no, i.item_image, i.item_name, ip.itempay_date, ip.itempay_price, ip.itempay_count, ip.itempay_buyer, ip.itempay_email, ip.itempay_receipt
+		select ip.itempay_no, i.item_image, i.item_name, ip.itempay_date, ip.itempay_price, ip.itempay_count, ip.itempay_buyer, ip.itempay_email, ip.itempay_receipt, ip.itempay_point
 		from itempay ip 
 		left join item i on ip.item_no = i.item_no
 		where ip.member_no = #{memberNo}
@@ -91,4 +110,17 @@
 		set member_phone = #{memberPhone}, member_pw = #{memberPw}, member_pwCheck = #{memberPwCheck}, member_address = #{memberAddress}
 		where member_no = #{memberNo}
 	</update>
+	
+	<select id="getCommentMypage" parameterType="int" resultType="com.six.dto.CommentMypage">
+		select c.coid, m.movie_image, c.score, c.text
+		from comment c
+		left join movie m on c.movie_no = m.movie_no 
+		where member_no = #{memberNo}
+		order by c.coid desc
+	</select>
+	
+	<delete id="deleteComment" parameterType="int">
+		delete from comment
+		where coid = #{coid}
+	</delete>
 </mapper>

@@ -14,8 +14,6 @@ public class MemberServiceImpl implements MemberService {
     @Autowired
     private MemberMapper memberMapper;
 
-
-
     @Override
     public int memberSignUp(Member member) {
         return memberMapper.memberSignUp(member);

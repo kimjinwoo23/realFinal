@@ -17,4 +17,8 @@ public class ItempayMypage {
 	private String itempayBuyer; 
 	private String itempayEmail; 
 	private int itempayReceipt;
+	private int itempayPoint;
+	private String itempayPointUse;
+	private String memberGrade;
+	private int memberNo;
 }

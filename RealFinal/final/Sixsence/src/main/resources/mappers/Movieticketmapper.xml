@@ -57,12 +57,12 @@
     </select>
 
     <select id="movieSeat" resultType="string" parameterType="map">
-        SELECT GROUP_CONCAT(moviepay_seat SEPARATOR ',') AS booked_seats
-        FROM moviepay
-        WHERE movie_no = #{movieNo, jdbcType=INTEGER}
-          AND moviepay_viewdate = #{viewDate, jdbcType=VARCHAR}
-          AND moviepay_viewtime = #{time, jdbcType=TIME};
-    </select>
+	    SELECT GROUP_CONCAT(moviepay_seat SEPARATOR ',') AS booked_seats
+	    FROM moviepay
+	    WHERE movie_no = #{movieNo, jdbcType=INTEGER}
+	      AND moviepay_viewdate = #{viewDate, jdbcType=DATE}
+	      AND moviepay_viewtime = #{time, jdbcType=TIME};
+</select>
 
     <select id="getMovieById" parameterType="int" resultType="com.six.dto.Movie">
         SELECT * FROM movie WHERE movie_no = #{movieNo}

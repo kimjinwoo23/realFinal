@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.six.dto.CommentMypage;
 import com.six.dto.ItempayMypage;
 import com.six.dto.Member;
 import com.six.dto.Movie;
@@ -75,6 +75,19 @@ public class MypageServiceImpl implements MypageService {
 	public void cancelItempay(int itempayNo) {
 		mypageMapper.cancelItempay(itempayNo);
 	}
+	
+	@Override
+	public void returnPointItem(ItempayMypage itempayMypage) {
+		if(itempayMypage.getItempayPointUse().equalsIgnoreCase("Y")) {
+			mypageMapper.returnPointYItem(itempayMypage);
+		} else {
+			if(itempayMypage.getMemberGrade().equalsIgnoreCase("VIP")) {
+				mypageMapper.returnPointNItemVip(itempayMypage);
+			} else {
+				mypageMapper.returnPointNItemNew(itempayMypage);
+			}
+		}
+	}
 
 	@Override
 	public List<ItempayMypage> getRefundItempayList(int memberNo) {
@@ -117,5 +130,15 @@ public class MypageServiceImpl implements MypageService {
 	@Override
 	public void editMember(Member member) {
 		mypageMapper.editMember(member);
+	}
+
+	@Override
+	public List<CommentMypage> getCommentMypage(int memberNo) {
+		return mypageMapper.getCommentMypage(memberNo);
+	}
+
+	@Override
+	public void deleteComment(int coid) {
+		mypageMapper.deleteComment(coid);
 	}
 }

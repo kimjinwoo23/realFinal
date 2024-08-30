@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.six.dto.CommentMypage;
 import com.six.dto.ItempayMypage;
 import com.six.dto.Member;
 import com.six.dto.Moviepay;
@@ -53,6 +54,11 @@ public class MypageController {
 		mypageService.cancelItempay(itempayNo);
 	}
 	
+	@PutMapping("/returnPointItem")
+	public void returnPointItem(@RequestBody ItempayMypage itempayMypage) {
+		mypageService.returnPointItem(itempayMypage);
+	}
+	
 	@GetMapping("/getRefundItempayList")
 	public ResponseEntity<List<ItempayMypage>> getRefundItempayList (@RequestParam("memberNo") int memberNo) {
 		return ResponseEntity.ok(mypageService.getRefundItempayList(memberNo));
@@ -86,5 +92,15 @@ public class MypageController {
 	@PutMapping("/editMember")
 	public void editMember(@RequestBody Member member) {
 		mypageService.editMember(member);
+	}
+	
+	@GetMapping("/getCommentListMypage")
+	public ResponseEntity<List<CommentMypage>> getCommentMypage(@RequestParam("memberNo") int memberNo) {
+		return ResponseEntity.ok(mypageService.getCommentMypage(memberNo));
+	}
+	
+	@DeleteMapping("/deleteCommentMypage")
+	public void deleteComment(@RequestParam("coid") int coid) {
+		mypageService.deleteComment(coid);
 	}
 }

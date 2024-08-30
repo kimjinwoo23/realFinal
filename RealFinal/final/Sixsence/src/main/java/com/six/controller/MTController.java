@@ -1,10 +1,13 @@
 package com.six.controller;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -50,8 +53,8 @@ public class MTController {
 	@GetMapping("/movieSeat/{movieNo}")
 	public ResponseEntity<List<String>> movieSeat(
 			@PathVariable("movieNo") int movieNo,
-			@RequestParam("viewDate") String viewDate,
-			@RequestParam("time") String time) {
+			@RequestParam("viewDate") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate viewDate,
+			@RequestParam("time") @DateTimeFormat(pattern = "HH:mm:ss") LocalTime time) {
 
 		Map<String, Object> params = new HashMap<>();
 		params.put("movieNo", movieNo);

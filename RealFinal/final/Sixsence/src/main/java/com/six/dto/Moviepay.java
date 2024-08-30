@@ -8,7 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 public class Moviepay {
-
+	private int moviepayNo;
 	private int moviepayAdult;
 	private int moviepayChild;
 	private int moviepayAdultpay;

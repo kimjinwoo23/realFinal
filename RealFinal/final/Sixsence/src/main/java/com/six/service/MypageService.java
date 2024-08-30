@@ -3,6 +3,7 @@ package com.six.service;
 import java.util.List;
 import java.util.Map;
 
+import com.six.dto.CommentMypage;
 import com.six.dto.ItempayMypage;
 import com.six.dto.Member;
 import com.six.dto.Moviepay;
@@ -21,6 +22,8 @@ public interface MypageService {
 	
 	void cancelItempay(int itempayNo);
 	
+	void returnPointItem(ItempayMypage itempayMypage);
+
 	List<ItempayMypage> getRefundItempayList(int memberNo);
 	
 	List<Moviepay> getRefundMovieList(int memberNo);
@@ -36,4 +39,8 @@ public interface MypageService {
 	Member getLoginMember(int memberNo);
 	
 	void editMember(Member member);
+	
+	List<CommentMypage> getCommentMypage(int memberNo);
+	
+	void deleteComment(int coid);
 }

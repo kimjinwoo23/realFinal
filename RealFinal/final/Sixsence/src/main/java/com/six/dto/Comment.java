@@ -14,7 +14,8 @@ import lombok.ToString;
 public class Comment {
 	private int coid;
 	private int score;
-	private String soname;
+	private int memberNo;
 	private String text;
 	private int movieNo;
+	private String soname;
 }

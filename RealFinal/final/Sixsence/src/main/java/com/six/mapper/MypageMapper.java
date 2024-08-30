@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.six.dto.CommentMypage;
 import com.six.dto.ItempayMypage;
 import com.six.dto.Member;
 import com.six.dto.Movie;
@@ -19,10 +20,20 @@ public interface MypageMapper {
 	
 	void cancelReservation(int moviepayNo);
 	
+	void returnPointY(Moviepay moviepay);
+	
+	void returnPointN(Moviepay moviepay);
+
 	List<ItempayMypage> getItempayList(int memberNo);
 
 	void cancelItempay(int itempayNo);
 	
+	void returnPointYItem(ItempayMypage itempayMypage);
+	
+	void returnPointNItemNew(ItempayMypage itempayMypage);
+	
+	void returnPointNItemVip(ItempayMypage itempayMypage);
+
 	List<ItempayMypage> getRefundItempayList(int memberNo);
 	
 	List<Moviepay> getRefundMovieList(int memberNo);
@@ -33,13 +44,13 @@ public interface MypageMapper {
 	
 	void deleteObo(int oboNo);
 	
-	void returnPointY(Moviepay moviepay);
-	
-	void returnPointN(Moviepay moviepay);
-	
 	Member getLoginMember(int memberNo);
 	
 	void updateGrade(Member member);
 	
 	void editMember(Member member);
+	
+	List<CommentMypage> getCommentMypage(int memberNo);
+	
+	void deleteComment(int coid);
 }

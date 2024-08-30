@@ -1,12 +1,8 @@
 package com.six.service;
-
-import java.util.List;
-
 import com.six.dto.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.six.dto.Member;
 import com.six.mapper.NaverUserMapper;
 /*
  * implements 로 상속받는 인터페이스 서비스는
